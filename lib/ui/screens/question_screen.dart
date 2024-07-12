@@ -70,13 +70,15 @@ class QuestionScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
           ),
-          PageView.builder(
-            itemCount: question.length,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                height: 200,
-                width: 200,
-                child: Column(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width * 1,
+            child: PageView.builder(
+              physics:
+                  const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+              itemCount: question.length,
+              itemBuilder: (context, index) {
+                return Column(
                   children: [
                     Text(
                       textAlign: TextAlign.center,
@@ -90,12 +92,17 @@ class QuestionScreen extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Text(
-                      question[index]["option1"].toString(),
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff45536D),
+                    GestureDetector(
+                      onTap: () {
+                        index + 1;
+                      },
+                      child: Text(
+                        question[index]["option1"].toString(),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff45536D),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -132,9 +139,9 @@ class QuestionScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              );
-            },
+                );
+              },
+            ),
           )
         ],
       ),
