@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:study_budy/data/model/question_Model.dart';
+import 'package:study_budy/data/map/question_map.dart';
+import 'package:study_budy/ui/screens/result_screen.dart';
 
-class QuestionScreen extends StatelessWidget {
+class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
+  @override
+  _QuestionScreenState createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+  PageController pageController = PageController(initialPage: 0);
+  int currentQuestionIndex = 0;
+
+  void _nextQuestion() {
+    setState(() {
+      if (currentQuestionIndex < question.length - 1) {
+        currentQuestionIndex++;
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/result", (Route<dynamic> route) => false);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +51,7 @@ class QuestionScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //score text
+                // Score and progress text widgets
                 RichText(
                   text: const TextSpan(
                     children: [
@@ -63,7 +87,6 @@ class QuestionScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // qution
               ],
             ),
           ),
@@ -74,15 +97,20 @@ class QuestionScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width * 1,
             child: PageView.builder(
-              physics:
-                  const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: question.length,
+              onPageChanged: (value) {
+                setState(() {
+                  currentQuestionIndex = value;
+                });
+              },
               itemBuilder: (context, index) {
                 return Column(
                   children: [
                     Text(
-                      textAlign: TextAlign.center,
                       question[index]["question"].toString(),
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w400,
@@ -94,7 +122,13 @@ class QuestionScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        index + 1;
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeIn,
+                        );
+                        _nextQuestion();
+
+                        print("this is the index $currentQuestionIndex");
                       },
                       child: Text(
                         question[index]["option1"].toString(),
@@ -108,41 +142,74 @@ class QuestionScreen extends StatelessWidget {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Text(
-                      question[index]["option2"].toString(),
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff45536D),
+                    GestureDetector(
+                      onTap: () {
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeIn,
+                        );
+                        _nextQuestion();
+
+                        print("this is the index $currentQuestionIndex");
+                      },
+                      child: Text(
+                        question[index]["option2"].toString(),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff45536D),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Text(
-                      question[index]["option3"].toString(),
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff45536D),
+                    GestureDetector(
+                      onTap: () {
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeIn,
+                        );
+                        _nextQuestion();
+
+                        print("this is the index $currentQuestionIndex");
+                      },
+                      child: Text(
+                        question[index]["option3"].toString(),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff45536D),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Text(
-                      question[index]["option4"].toString(),
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff45536D),
+                    GestureDetector(
+                      onTap: () {
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeIn,
+                        );
+                        _nextQuestion();
+
+                        print("this is the index $currentQuestionIndex");
+                      },
+                      child: Text(
+                        question[index]["option4"].toString(),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xff45536D),
+                        ),
                       ),
                     ),
                   ],
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );

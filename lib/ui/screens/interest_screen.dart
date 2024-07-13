@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_budy/data/model/interest_model.dart';
+import 'package:study_budy/data/map/interest_map.dart';
 
 class InterestScreen extends StatefulWidget {
   const InterestScreen({super.key});

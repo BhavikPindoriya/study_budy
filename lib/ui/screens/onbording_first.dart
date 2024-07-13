@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:study_budy/data/model/onbordind_model.dart';
+import 'package:study_budy/data/map/onbordind_map.dart';
 
 import '../widget/custom_button.dart';
 

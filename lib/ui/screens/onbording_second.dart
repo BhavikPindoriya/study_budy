@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:study_budy/data/model/progress_model.dart';
+import 'package:study_budy/data/map/progress_map.dart';
 import 'package:study_budy/ui/widget/custom_button.dart';
 
 class OnbordingSecond extends StatefulWidget {
@@ -154,7 +154,7 @@ class _OnbordingSecondState extends State<OnbordingSecond> {
                             ),
                           ),
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Stack(

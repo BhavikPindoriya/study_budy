@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_budy/data/model/interest_model.dart';
-import 'package:study_budy/data/model/subject_model.dart';
+import 'package:study_budy/data/map/interest_map.dart';
+import 'package:study_budy/data/map/subject_map.dart';
 
 class SubjectScreen extends StatefulWidget {
   const SubjectScreen({super.key});

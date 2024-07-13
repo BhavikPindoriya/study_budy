@@ -1,10 +1,13 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:study_budy/ui/colors/colors.dart';
+import 'package:study_budy/ui/screens/home/home_page.dart';
 import 'package:study_budy/ui/screens/interest_screen.dart';
 import 'package:study_budy/ui/screens/onbording_first.dart';
 import 'package:study_budy/ui/screens/onbording_second.dart';
+import 'package:study_budy/ui/screens/payment_success_screen.dart';
 import 'package:study_budy/ui/screens/question_screen.dart';
+import 'package:study_budy/ui/screens/result_screen.dart';
 import 'package:study_budy/ui/screens/subject_screen.dart';
 
 void main() {
@@ -28,13 +31,17 @@ class MyApp extends StatelessWidget {
                     scaffoldBackgroundColor: scaffoldbackgroundcolor,
                     useMaterial3: true,
                     colorScheme: ColorScheme.fromSeed(seedColor: primarycolor)
-                        .copyWith(secondary: secondorycolor)),
+                        .copyWith(
+                            secondary: secondorycolor, primary: primarycolor)),
                 routes: {
                   "/": (context) => const OnbordingFirst(),
                   "/onbordingSecond": (context) => const OnbordingSecond(),
                   "/interest": (context) => const InterestScreen(),
                   "/subject": (context) => const SubjectScreen(),
-                  "/question": (context) => const QuestionScreen()
+                  "/question": (context) => const QuestionScreen(),
+                  "/result": (context) => const ResultScreen(),
+                  "/paymentsuccess": (context) => const PaymentSuccessScreen(),
+                  "/home": (context) => const HomePage()
                 },
               );
             }),
