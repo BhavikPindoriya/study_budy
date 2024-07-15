@@ -10,9 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomePage> {
+  final PageController pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 0);
     return Scaffold(
       body: PageView(
         controller: pageController,
@@ -29,77 +30,74 @@ class _HomeScreenState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         shape: const CircleBorder(),
-        onPressed: () {},
-        child: Center(
-          child: Image.asset("assets/png/messages icon.png"),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onTap: (value) {
+        onPressed: () {
           setState(() {
-            pageController.jumpToPage(value);
+            int nextPage = (pageController.page?.toInt() ?? 0) + 1;
+            if (nextPage >= 4) {
+              nextPage = 0;
+            }
+            pageController.jumpToPage(nextPage);
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "home",
-            backgroundColor: Colors.amber,
+        child: Center(
+          child: Image.asset(
+              "assets/png/messages icon.png"), // Ensure the correct path
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 5.0,
+        color: Theme.of(context).colorScheme.primary,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _buildBottomNavigationBarItem(
+              "assets/png/home_bottom.png",
+              "Home",
+              0,
+            ),
+            _buildBottomNavigationBarItem(
+              "assets/png/book_icon.png",
+              "Books",
+              1,
+            ),
+            _buildBottomNavigationBarItem(
+              "assets/png/study_icon.png",
+              "Planner",
+              2,
+            ),
+            _buildBottomNavigationBarItem(
+              "assets/png/menu_icon.png",
+              "Menu",
+              3,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomNavigationBarItem(
+      String iconPath, String label, int pageIndex) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          pageController.jumpToPage(pageIndex);
+        });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(iconPath, width: 24, height: 24),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(color: Colors.white),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: "Books",
-            backgroundColor: Colors.amber,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined),
-            label: "Study Planner",
-            backgroundColor: Colors.amber,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: "Menu",
-            backgroundColor: Colors.amber,
-          )
         ],
       ),
-
-      // bottomNavigationBar: BottomAppBar(
-      //   shape: const CircularNotchedRectangle(),
-      //   notchMargin: 5.0,
-      //   color: Theme.of(context).colorScheme.primary,
-      //   child: Row(
-      //     mainAxisSize: MainAxisSize.max,
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //     children: <Widget>[
-      //       IconButton(
-      //         icon: const Icon(Icons.home),
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(Icons.search),
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(Icons.favorite_border_outlined),
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(Icons.account_circle_outlined),
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
